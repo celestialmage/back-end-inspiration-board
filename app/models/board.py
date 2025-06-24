@@ -8,4 +8,19 @@ class Board(db.Model):
     owner: Mapped[str]
     cards: Mapped[list['Card']] = relationship(back_populates='board')
 
-    
+    def to_dict(self):
+
+        return {
+            "board_id": self.id,
+            "title": self.title,
+            "owner": self.owner
+        }
+
+
+    @classmethod
+    def from_dict(cls, board_data):
+        return cls(
+            title=board_data["title"],
+            owner=board_data["owner"]
+        )    
+
