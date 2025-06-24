@@ -26,7 +26,7 @@ def get_all_boards():
     elif sort_param == "desc":
         query = query.order_by(Board.title.desc())
     else:
-        query = query.order_by(Board.board_id)
+        query = query.order_by(Board.id)
 
     boards = db.session.scalars(query)
     
@@ -38,22 +38,22 @@ def get_all_boards():
 
 
 # GET/<id>/boards reading all cards of a board <id>
-@bp.get("/<board_id>/cards")
-def read_cards_for_board(board_id):
-    board = validate_model(Board, board_id)
+@bp.get("/<id>/cards")
+def read_cards_for_board(id):
+    board = validate_model(Board, id)
 
     cards_response = []
     for card in board.cards:
         card_dict = {
-            "card_id": card.card_id,
+            "id": card.id,
             "message": card.message,
             "likes_count": card.likes_count,
-            "board_id": board.board_id,
+            "id": board.id,
         }
         cards_response.append(card_dict)
 
     response_body = {
-        "id": board.board_id,
+        "id": board.id,
         "title": board.title,
         "owner": board.owner,
         "cards": cards_response  
