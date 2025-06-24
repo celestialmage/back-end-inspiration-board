@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
-from typing import Optional
 from ..db import db
 
 class Card(db.Model):
@@ -15,5 +14,19 @@ class Card(db.Model):
 
         card_dict = {
             'card_id': self.card_id,
-            ''
+            'message': self.message,
+            'likes_count': self.likes_count,
+            'board_id': self.board_id
         }
+
+        return card_dict
+    
+    @classmethod
+    def from_dict(cls, card_data):
+
+        new_card = Card(card_id=card_data['card_id'],
+                        message=card_data['message'],
+                        likes_count=card_data['likes_count'],
+                        board_id=card_data['board_id'])
+        
+        return new_card
