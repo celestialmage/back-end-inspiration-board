@@ -5,6 +5,7 @@ import os
 # Import models, blueprints, and anything else needed to set up the app or database
 from .models.board import Board
 from .models.card import Card
+from .routes.board_routes import bp as boards_bp
 
 
 def create_app(config=None):
@@ -22,6 +23,7 @@ def create_app(config=None):
     migrate.init_app(app, db)
 
     # Register Blueprints 
+    app.register_blueprint(boards_bp)
 
 
     CORS(app)
