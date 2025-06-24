@@ -3,6 +3,8 @@ from .db import db, migrate
 from flask_cors import CORS
 import os
 # Import models, blueprints, and anything else needed to set up the app or database
+from .models.board import Board
+from .models.card import Card
 
 
 def create_app(config=None):
@@ -20,6 +22,7 @@ def create_app(config=None):
     migrate.init_app(app, db)
 
     # Register Blueprints 
+
 
     CORS(app)
     return app

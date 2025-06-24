@@ -11,7 +11,7 @@ class Card(db.Model):
     card_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     message: Mapped[str]
     likes_count: Mapped[int]
-    board_id: Mapped[int] = mapped_column(ForeignKey('board.id'))
+    board_id: Mapped[int] = mapped_column(ForeignKey('board.board_id'))
     board: Mapped['Board'] = relationship(back_populates='board')
 
     def to_dict(self):
