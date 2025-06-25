@@ -18,6 +18,7 @@ def validate_model(cls, model_id):
 
     return model
 
+
 def model_from_request(cls, request):
 
     request_body = request.get_json()
@@ -29,3 +30,20 @@ def model_from_request(cls, request):
         abort(make_response(response, 400))
 
     return model_dict
+
+
+# Creates a dictionary form of a Class instance from a request body
+# and return JSON of the dict and status code
+
+def create_model(cls, model_data):
+    try:
+        new_model = cls.from_dict(model_data)
+        
+    except KeyError as error:
+        response = {"details": "Invalid data"}
+        abort(make_response(response, 400))
+    
+    db.session.add(new_model)
+    db.session.commit()
+
+    return new_model.to_dict(), 201

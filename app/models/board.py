@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from .card import Card
 
 class Board(db.Model):
-    board_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str]
     owner: Mapped[str]
     cards: Mapped[list['Card']] = relationship(back_populates='board')
@@ -15,7 +15,7 @@ class Board(db.Model):
     def to_dict(self):
 
         return {
-            "board_id": self.id,
+            "id": self.id,
             "title": self.title,
             "owner": self.owner
         }
@@ -26,5 +26,5 @@ class Board(db.Model):
         return cls(
             title=board_data["title"],
             owner=board_data["owner"]
-        )    
+        )  
 
