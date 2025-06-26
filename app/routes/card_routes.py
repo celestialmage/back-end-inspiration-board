@@ -10,6 +10,10 @@ bp = Blueprint('cards', __name__, url_prefix='/cards')
 def create_card():
     board_id = request.args.get('board_id')
 
+    if not board_id:
+        response = { 'message': 'Missing \'board_id\' query parameter.' }
+        abort(make_response(response, 400))
+
     request_body = request.get_json()
 
     request_body['board_id'] = board_id
@@ -25,6 +29,10 @@ def create_card():
 def get_all_cards():
 
     board_id = request.args.get('board_id')
+
+    if not board_id:
+        response = { 'message': 'Missing \'board_id\' query parameter.' }
+        abort(make_response(response, 400))
 
     query = db.select(Card).where(Card.board_id == board_id)
 
