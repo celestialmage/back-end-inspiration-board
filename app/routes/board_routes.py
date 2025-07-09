@@ -14,6 +14,25 @@ def create_board():
     return model_dict, status
 
 
+# POST/boards/<board_id>/cards
+@bp.post("/<board_id>/cards")
+def create_card(board_id):
+
+    validate_model(Board, board_id)
+
+    request_body = request.get_json()
+
+    request_body['board_id'] = board_id
+
+    if len(request_body['message']) > 40:
+        response = { 'message': 'Message must be shorter than 40 charaters' }
+        abort(make_response(response, 400))
+
+    model_dict, status = create_model(Card, request_body)
+    return model_dict, status
+
+
+
 # GET/boards request reading all boards
 @bp.get("")
 def get_all_boards():
@@ -44,19 +63,6 @@ def read_cards_for_board(id):
 
     cards_response = []
     for card in board.cards:
-        card_dict = {
-            "id": card.id,
-            "message": card.message,
-            "likes_count": card.likes_count,
-            "id": board.id,
-        }
-        cards_response.append(card_dict)
+        cards_response.append(card.to_dict())
 
-    response_body = {
-        "id": board.id,
-        "title": board.title,
-        "owner": board.owner,
-        "cards": cards_response  
-    }
-
-    return jsonify(response_body), 200
+    return cards_response, 200

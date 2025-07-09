@@ -21,12 +21,7 @@ def test_get_cards_by_board(client, one_board):
 
     # Assert
     assert response.status_code == 200
-    assert response_body == {
-        "id": 1,
-        "title": "Build a habit of going outside daily",
-        "owner": "Ellie",
-        "cards": []
-    }
+    assert response_body == []
 
 
 # @pytest.mark.skip(reason="No way to test this feature yet")
@@ -37,19 +32,14 @@ def test_get_cards_by_board_with_one_card(client, one_card_belongs_to_one_board)
 
     # Assert
     assert response.status_code == 200
-    assert response_body == {
-        "id": 1,
-        "title": "Build a habit of going outside daily",
-        "owner": "Ellie",
-        "cards": [
-            {
-                "id": 1,
-                "message": "Go on my daily walk 🏞",
-                "likes_count": 1,
-                "board_id": 1
-            }
-        ]
-    }
+    assert response_body == [
+        {
+            "id": 1,
+            "message": "Go on my daily walk 🏞",
+            "likes_count": 1,
+            "board_id": 1
+        }
+    ]
 
 
 # @pytest.mark.skip(reason="No way to test this feature yet")
