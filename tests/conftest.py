@@ -1,5 +1,5 @@
 import pytest
-from __init__ import create_app # recheck the route
+from app.__init__ import create_app # recheck the route
 from app.db import db
 from flask.signals import request_finished
 from dotenv import load_dotenv
@@ -73,7 +73,7 @@ def three_cards(app):
 # This fixture creates a card with a
 @pytest.fixture
 def liked_card(app):
-    new_card = Card(message="Go on my daily walk 🏞", 
+    new_card = Card(message="Explore Seattle 🏞", 
                     likes_count=0)
     db.session.add(new_card)
     db.session.commit()
@@ -85,7 +85,8 @@ def liked_card(app):
 @pytest.fixture
 def one_board(app):
     new_board = Board(title="Build a habit of going outside daily",
-                    owner= "Ellie")
+                    owner= "Ellie",
+                    )
     db.session.add(new_board)
     db.session.commit()
 
