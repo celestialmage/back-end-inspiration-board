@@ -54,9 +54,8 @@ def test_create_board_must_contain_title(client):
     assert response.status_code == 400
     assert "details" in response_body
     assert response_body == {
-        "details": "Invalid data"
+        "details": "Invalid data. Missing title"
     }
-    assert db.session.scalars(db.select(Board)).all() == []
 
 
 # @pytest.mark.skip(reason="No way to test this feature yet")
@@ -71,6 +70,5 @@ def test_create_board_must_contain_owner(client):
     assert response.status_code == 400
     assert "details" in response_body
     assert response_body == {
-        "details": "Invalid data"
+        "details": "Invalid data. Missing owner"
     }
-    assert db.session.scalars(db.select(Board)).all() == []

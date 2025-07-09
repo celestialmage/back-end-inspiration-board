@@ -14,21 +14,21 @@ def create_board():
     return model_dict, status
 
 # POST/boards/<board_id>/cards
-@bp.post("/<board_id>/cards")
-def create_card(board_id):
+# @bp.post("/<board_id>/cards")
+# def create_card(board_id):
 
-    validate_model(Board, board_id)
+#     validate_model(Board, board_id)
 
-    request_body = request.get_json()
+#     request_body = request.get_json()
 
-    request_body['board_id'] = board_id
+#     request_body['board_id'] = board_id
 
-    if len(request_body['message']) > 40:
-        response = { 'message': 'Message must be shorter than 40 charaters' }
-        abort(make_response(response, 400))
+#     if len(request_body['message']) > 40:
+#         response = { 'message': 'Message must be shorter than 40 charaters' }
+#         abort(make_response(response, 400))
 
-    model_dict, status = create_model(Card, request_body)
-    return model_dict, status
+#     model_dict, status = create_model(Card, request_body)
+#     return model_dict, status
 
 # POST/boards/<board_id>/cards
 @bp.post("/<board_id>/cards")
