@@ -8,7 +8,7 @@ import pytest
 #     # Assert
 
 @pytest.mark.skip(reason="No way to test this feature yet")
-def test_get_board_not_found(client):
+def test_get_card_not_found(client):
     # Act
     response = client.get("/cards/1")
     response_body = response.get_json()

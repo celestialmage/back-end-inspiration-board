@@ -45,7 +45,7 @@ def client(app):
 def one_card(app):
     new_card = Card(
                     message="Go on my daily walk 🏞", 
-                    likes_count=None
+                    likes_count=1
                     )
     db.session.add(new_card)
     db.session.commit()
@@ -59,11 +59,11 @@ def one_card(app):
 def three_cards(app):
     db.session.add_all([
         Card(message="Water the garden 🌷", 
-            likes_count=None),
+            likes_count=1),
         Card(message="Answer forgotten email 📧", 
-            likes_count=None),
+            likes_count=0),
         Card(message="Pay my outstanding tickets 😭", 
-            likes_count=None)
+            likes_count=2)
     ])
     db.session.commit()
 
