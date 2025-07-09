@@ -24,3 +24,4 @@ def like_card(card_id):
     db.session.commit()
 
     return Response(status=204, mimetype='application/json')
+
