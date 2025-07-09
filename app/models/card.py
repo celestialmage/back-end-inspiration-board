@@ -28,8 +28,9 @@ class Card(db.Model):
     @classmethod
     def from_dict(cls, card_data):
 
-        new_card = Card(id=card_data['id'],
-                        message=card_data['message'],
+        card_data['likes_count'] = 0
+
+        new_card = Card(message=card_data['message'],
                         likes_count=card_data['likes_count'],
                         board_id=card_data['board_id'])
         
